@@ -1,31 +1,37 @@
 .head {
-    background-color: rgb(54, 55, 61);
+    background-color: rgb(155, 158, 172);
     color:rgb(122, 124, 134);
   }
   .footer {
-    background-color: rgb(54, 55, 61);
-    color:rgb(122, 124, 134);
+    background-color: rgb(18, 20, 27);
+    border-top: 1px solid rgb(1, 19, 29);
+    color:rgb(36, 41, 55);
     }
   .side-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(37, 37, 38);
+    background-color: rgb(26, 29, 30);
     color: rgb(215, 219, 223);
   }
   .room-nav {
-    background-color: rgb(61, 61, 65);
-    color: rgb(215, 219, 223);
+    background-color: rgb(74, 77, 78);
+    color: rgb(226, 232, 238);
   }
+
+  h6 {
+    border-bottom: 1px solid rgb(117, 119, 122);
+  }
+  
   .main {
-    background-color: rgb(86, 86, 91);
-    color: rgb(215, 219, 223);
+    background-color: rgb(228, 230, 231);
+    color: rgb(111, 113, 115);
     display: flex;
     flex-direction: column;
   }
   .users-list {
-    background-color: rgb(61, 61, 65);
-    color: rgb(215, 219, 223);
+    background-color: rgb(162, 168, 170);
+    color: rgb(226, 229, 237);
   }
   .container {
     min-width: 100vw;
@@ -33,8 +39,8 @@
   .col {
     min-height: 100vh;
   }
-  .message {
-    border-top: 1px solid rgb(122, 122, 126);
+  .messages {
+    border-top: 1px solid rgb(196, 196, 207);
     padding-top: 30px;
     padding-bottom: 30px;
   }
@@ -50,7 +56,7 @@
   .enter-text {
     padding: 10px;
     color: rgb(171, 173, 178);
-    background-color: rgb(131, 131, 140);
+    background-color: rgb(90, 90, 95);
     position: relative;
     border-radius: 3px;
     bottom: 10px;

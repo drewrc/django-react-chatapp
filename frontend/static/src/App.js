@@ -6,7 +6,7 @@ import Welcome from './components/loginview';
 import React, { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-
+import Container from 'react-bootstrap/esm/Container';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -32,7 +32,7 @@ function App() {
 
   return (
   <div>
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className='nav-bar'>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
@@ -44,6 +44,12 @@ function App() {
       </Navbar.Collapse>
     </Navbar>
     {renderPage()}
+
+    <div className="fixed-bottom footer">        
+                <Container>
+                    Discourse
+                </Container>
+        </div>
   </div>
 
   );

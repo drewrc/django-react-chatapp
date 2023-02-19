@@ -1,32 +1,6 @@
-.head {
-    background-color: rgb(54, 55, 61);
-    color:rgb(122, 124, 134);
-  }
-  .footer {
-    background-color: rgb(54, 55, 61);
-    color:rgb(122, 124, 134);
-    }
-  .side-bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgb(37, 37, 38);
-    color: rgb(215, 219, 223);
-  }
-  .room-nav {
-    background-color: rgb(61, 61, 65);
-    color: rgb(215, 219, 223);
-  }
-  .main {
-    background-color: rgb(86, 86, 91);
-    color: rgb(215, 219, 223);
-    display: flex;
-    flex-direction: column;
-  }
-  .users-list {
-    background-color: rgb(61, 61, 65);
-    color: rgb(215, 219, 223);
-  }
+
+ 
+
   .login-container {
     min-width: 70%;
   }
@@ -52,11 +26,7 @@
   .password-box {
     padding-bottom: 20px;
   }
-  .message {
-    border-top: 1px solid rgb(122, 122, 126);
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
+
   .user {
     padding-top: 10px;
     padding-bottom: 10px;
