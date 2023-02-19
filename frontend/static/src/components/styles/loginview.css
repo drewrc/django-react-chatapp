@@ -1,0 +1,76 @@
+.head {
+    background-color: rgb(54, 55, 61);
+    color:rgb(122, 124, 134);
+  }
+  .footer {
+    background-color: rgb(54, 55, 61);
+    color:rgb(122, 124, 134);
+    }
+  .side-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(37, 37, 38);
+    color: rgb(215, 219, 223);
+  }
+  .room-nav {
+    background-color: rgb(61, 61, 65);
+    color: rgb(215, 219, 223);
+  }
+  .main {
+    background-color: rgb(86, 86, 91);
+    color: rgb(215, 219, 223);
+    display: flex;
+    flex-direction: column;
+  }
+  .users-list {
+    background-color: rgb(61, 61, 65);
+    color: rgb(215, 219, 223);
+  }
+  .login-container {
+    min-width: 70%;
+  }
+  .col {
+    min-height: 100vh;
+  }
+  h2 {
+    text-align: center;
+    padding: 30px;
+  }
+  h3 {
+    text-align: center;
+    text-transform: uppercase;
+  }
+  h4 {
+    font-size: 12px;
+    padding-left: 40px;
+  }
+  .login-text {
+    padding: 30px;
+    margin: 20px;
+  }
+  .password-box {
+    padding-bottom: 20px;
+  }
+  .message {
+    border-top: 1px solid rgb(122, 122, 126);
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .user {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .group-icon {
+    max-height: 80%;
+    max-width: 80%;
+    border-radius: 50%;
+  }
+  .enter-text {
+    padding: 10px;
+    color: rgb(171, 173, 178);
+    background-color: rgb(131, 131, 140);
+    position: relative;
+    border-radius: 3px;
+    bottom: 10px;
+  }
