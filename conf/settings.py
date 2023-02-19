@@ -12,6 +12,17 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+# from django.contrib.auth.models import User
+# from django.contrib.sites.models import Site
+# from django.urls import reverse_lazy
+# from rest_framework import serializers
+# from rest_framework.authtoken.models import Token
+# from allauth.account.adapter import DefaultAccountAdapter
+# from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+# from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+# from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+# from dj_rest_auth.registration.views import SocialLoginView
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,48 +43,52 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+   'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # #dj all auth
-    # 'dj_rest_auth',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # #dj rest auth
-    # #https://django-rest-auth.readthedocs.io/en/latest/installation.html
-    # 'rest_auth.registration',
-    # 'dj_rest_auth.registration'
 
-    # 3rd party
+    'django.contrib.sites',
+
     'rest_framework',
-    # 'rest_framework.authtoken',
+    'rest_framework.authtoken',
+    'rest_auth',
+    #dj all auth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
-    #local
-   'api.apps.ApiConfig',
-   'chatrooms.apps.ChatroomsConfig',
-   'frontend.apps.FrontendConfig',
+    # dj rest auth
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+
+
+    
+    # local
+    'api.apps.ApiConfig',
+    'chatrooms.apps.ChatroomsConfig',
+    'frontend.apps.FrontendConfig',
 ]
 
-# locks down API end points unless you're authenticated
-# CSRF TOKEN isses:
+# locks down API endpoints unless you're authenticated
+# CSRF TOKEN issues:
 # localhost:8000 re-log-in
 # localhost:3000 - change server to 127
 # https://www.django-rest-framework.org/api-guide/permissions/
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.IsAuthenticated',
-#     ],
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         # keep for now for the browserable api
-#         'rest_framework.authentication.SessionAuthentication'
-#         # for token based implementation in react
-#         'rest_framework.authentication.TokenAuthentication',
-#     ]
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # keep for now for the browsable api
+        'rest_framework.authentication.SessionAuthentication',
+        # for token based implementation in react
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

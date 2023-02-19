@@ -4,12 +4,11 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Chatroom(models.Model):
-    title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
-
+    name = models.CharField(max_length=255)
+    members = models.ManyToManyField(User, related_name='rooms')
 
     def __str__(self):
-        return self.title
+        return self.name
 
 class User(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
