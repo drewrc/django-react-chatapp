@@ -1,13 +1,12 @@
-from rest_framework import generics
-from .models import User
-from .models import Chatroom
-from .serializers import ChatroomSerializer, UserSerializer
-from django.shortcuts import get_object_or_404
+from django.urls import path
+from . import views 
 
-class ChatroomListAPIView(generics.ListCreateAPIView):
-    queryset = Chatroom.objects.all()
-    serializer_class = ChatroomSerializer
 
-class UserListAPIView(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+#http://127.0.0.1:8000/api_v1/chatrooms/register/
+
+urlpatterns = [
+    path('', views.ChatroomListAPIView.as_view()),
+    path('users/', views.UserListAPIView.as_view()),
+    path('register/', views.RegisterView.as_view()),
+     path('login/', views.LoginView.as_view()),
+]

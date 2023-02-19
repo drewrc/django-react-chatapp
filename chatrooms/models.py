@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
+
 # Create your models here.
 class Chatroom(models.Model):
     title = models.CharField(max_length=255)
@@ -10,12 +12,19 @@ class Chatroom(models.Model):
         return self.title
 
 class User(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    #need to create relationship w/ review and model
-    #on_delete; remove the orphans 
-    #if you delete user, reviews all get deleted as well 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        #returns first 50 char from text 
-        return self.text[:50]
+        return self.text
+    
+class Message(models.Model):
+    #user = models.CASCADE to ensure that when a user is deleted, all of their messages are also deleted
+    #use 'User' from django authentication 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text
