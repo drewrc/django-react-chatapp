@@ -16,7 +16,7 @@ class Message(models.Model):
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
-    room = models.ForeignKey(Chatroom, on_delete=models.CASCADE)
+    room = models.ForeignKey(Chatroom, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
         return self.text

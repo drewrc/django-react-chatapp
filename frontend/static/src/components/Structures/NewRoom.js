@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import '../styles/chatinput.css'
 
 
-function ChatInput() {
+function NewRoom() {
    const [text, setText] = useState('');
 
   const handleSubmit = async (event) => {
@@ -16,22 +16,22 @@ function ChatInput() {
 
 
   return (
-    <div className='input-box'>
+    <div className='new-chat-room-box'>
         <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formChatInput">
         <Form.Control
             type="text"
-            placeholder="Enter Text Here"
+            placeholder="Create New Room"
             value={text}
             onChange={(e) => setText(e.target.value)}
         />
         </Form.Group>
         <Button variant="primary" type="submit">
-        Send
+        Submit
         </Button>
     </Form>
   </div>
   );
 }
 
-export default ChatInput;
+export default NewRoom;

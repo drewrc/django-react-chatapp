@@ -4,6 +4,7 @@ from .serializers import UserSerializer, MessageSerializer, ChatroomSerializer
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .permissions import IsMessageAuthor
 #, UserSerializer, 
 # from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth import authenticate, login
@@ -37,4 +38,5 @@ class MessageListAPIView(generics.ListCreateAPIView):
 class MessageDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+    permission_classes = (IsMessageAuthor,)
 

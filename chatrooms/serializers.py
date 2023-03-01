@@ -10,9 +10,15 @@ class ChatroomSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 class MessageSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField()
+
+    def get_username(self, obj):
+        return obj.user.get_username()
+
     class Meta:
         model = Message
-        fields = ('__all__')
+        fields = '__all__'
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
