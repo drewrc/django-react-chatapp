@@ -16,7 +16,7 @@ class UserListAPIView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class ChatroomListAPIView(generics.ListCreateAPIView):
+class ChatroomListCreateAPIView(generics.ListCreateAPIView):
     queryset = Chatroom.objects.all()
     serializer_class = ChatroomSerializer
 

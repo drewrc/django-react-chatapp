@@ -17,6 +17,8 @@ function ChatRoom({ handleRoomClick }) {
     getRoom();
   }, []);
 
+  
+
   const roomHTML = rooms.map((room) => (
     <div key={room.id}>
       <RoomComponent room={room} />

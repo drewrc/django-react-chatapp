@@ -7,7 +7,7 @@ from . import views
 
 urlpatterns = [
     #http://localhost:8000/api_v1/chatrooms/
-    path('chatrooms/', views.ChatroomListAPIView.as_view()),
+    path('chatrooms/', views.ChatroomListCreateAPIView.as_view()),
     path('chatrooms/<int:pk>/', views.ChatroomDetailAPIView.as_view()),
 
     #http://localhost:8000/api_v1/users/
@@ -16,7 +16,7 @@ urlpatterns = [
     #http://localhost:8000/api_v1/messages/
     # path('messages/', views.MessageListAPIView.as_view()),
     path('messages/<int:pk>/', views.MessageDetailAPIView.as_view()),
-    
+
     path('messages/chatroom/<int:room>/', views.MessageListAPIView.as_view()),
 
 ]
