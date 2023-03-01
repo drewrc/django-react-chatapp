@@ -12,17 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-# from django.contrib.auth.models import User
-# from django.contrib.sites.models import Site
-# from django.urls import reverse_lazy
-# from rest_framework import serializers
-# from rest_framework.authtoken.models import Token
-# from allauth.account.adapter import DefaultAccountAdapter
-# from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
-# from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-# from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
-# from dj_rest_auth.registration.views import SocialLoginView
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,29 +32,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-   'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 
-    'django.contrib.sites',
-
+    #3rd party 
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
-    #dj all auth
+    'dj_rest_auth',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
-    # dj rest auth
-    'dj_rest_auth',
     'dj_rest_auth.registration',
 
-
-    
     # local
     'api.apps.ApiConfig',
     'chatrooms.apps.ChatroomsConfig',

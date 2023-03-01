@@ -5,29 +5,37 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Cookies from 'js-cookie';
+
 
 function LoginView() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username, password: password })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+      body: JSON.stringify({ username, password }),
     };
+    //console.log({ options });
+    const response = await fetch("/dj-rest-auth/login/", options);
 
-    fetch('/api_v1/login/', options)
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-            console.log('Registration successful');
-        } else {
-        console.log('error');
-        }
-      });
+    if (!response.ok) {
+      console.log(response.status);
+      throw new Error("Network response not OK.");
+    }
+    const data = await response.json();
+    console.log(response.status);
+    Cookies.set("Authorization", `Token ${data.key}`)
+    console.log(Cookies.get("Authorization"));
+    setPassword("");
+    setUsername("");
   };
 
   return (

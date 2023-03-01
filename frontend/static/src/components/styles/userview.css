@@ -23,6 +23,14 @@
     border-bottom: 1px solid rgb(117, 119, 122);
   }
   
+  .enter-room {
+    text-align: center;
+  }
+  .enter-button {
+    width: 100%;
+    padding: 5px;
+  }
+  
   .main {
     background-color: rgb(228, 230, 231);
     color: rgb(111, 113, 115);
