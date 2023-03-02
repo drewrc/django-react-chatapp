@@ -28,10 +28,6 @@ class ChatroomDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ChatroomSerializer
     permission_classes = [IsAdminUser]
 
-# class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
 class MessageListAPIView(generics.ListCreateAPIView):
     serializer_class = MessageSerializer
     def get_queryset(self):

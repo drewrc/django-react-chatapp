@@ -11,7 +11,7 @@ function Messages({ roomId }) {
 
   // console.log(messages.id);
   // console.log(roomId)
-
+console.log(isAdmin)
   const handleCancelEdit = () => {
     setEditMessageId(null);
   };
@@ -80,6 +80,7 @@ function Messages({ roomId }) {
     getUser();
   }, []);
 
+  console.log({user})
   //returns isAdmin True or False depending on user ----->
   useEffect(() => {
     const getAdmin = async () => {
@@ -135,8 +136,10 @@ function Messages({ roomId }) {
       //  render message and edit button if user = message.user  ---- >
       //  render message and delete if isAdmin = True  OR user = message.user ---- >
       const canEdit = user && user.pk === message.user;
-      const canDelete = isAdmin || (user && user.pk === message.user);
-  
+      //const canDelete = isAdmin || (user && user.pk === message.user);
+      //canDelete will only be true if isAdmin is true AND user is not 
+      //null AND the user.pk is equal to message.user
+      const canDelete = isAdmin && user && user.pk === message.user;
       return (
         <div key={message.id}>
           {message.text}

@@ -8,19 +8,20 @@ function ChatRoom({ handleRoomClick }) {
   const [rooms, setRooms] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
 
-   //returns isAdmin True or False depending on user ----->
-   useEffect(() => {
+  //returns isAdmin True or False depending on user ----->
+  useEffect(() => {
     const getAdmin = async () => {
-      const response = await fetch ('/api_v1/is_admin/');
+      const response = await fetch("/api_v1/is_admin/");
       if (!response.ok) {
-        throw new Error("Network response was not ok")
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      setIsAdmin(data);
+      setIsAdmin(data.is_admin);
     };
     getAdmin();
   }, []);
-  console.log({isAdmin})
+  
+  console.log({ isAdmin });
 
   useEffect(() => {
     const getRoom = async () => {
@@ -47,36 +48,33 @@ function ChatRoom({ handleRoomClick }) {
     setRooms((prevRooms) => prevRooms.filter((room) => room.id !== roomId));
   };
 
-  const IsAdminTrue = (room) => {
-    if (isAdmin === true){
-      return (
-        <Button 
-        variant="danger" 
-        onClick={() => handleDelete(room.id)}
-        >
-          Remove
-        </Button> 
-      )
-    } else {
-      return null
-    }
-  }
+  // const IsAdminTrue = (room) => {
+  //   if (isAdmin === true){
+  //     return (
+  //       <Button
+  //       variant="danger"
+  //       onClick={() => handleDelete(room.id)}
+  //       >
+  //         Remove
+  //       </Button>
+  //     )
+  //   } else {
+  //     return null
+  //   }
+  // }
 
-  const DeleteButton = ({room, isAdmin}) => {
-    if (!isAdmin){
-      return null;
-    }
-    return (
-        <Button 
-        variant="danger" 
-        onClick={() => handleDelete(room.id)}
-        >
-          Remove
-        </Button> 
-    )
-  }
+  // const DeleteButton = ({ room, isAdmin }) => {
+  //   if (!isAdmin) {
+  //     return null;
+  //   }
+  //   return (
+  //     <Button variant="danger" onClick={() => handleDelete(room.id)}>
+  //       Remove
+  //     </Button>
+  //   );
+  // };
 
-console.log({IsAdminTrue})
+  // console.log({ IsAdminTrue });
 
   const roomHTML = rooms.map((room) => (
     <div key={room.id}>
@@ -88,26 +86,23 @@ console.log({IsAdminTrue})
       >
         {room.name}
       </Button>
-    
-    <DeleteButton />
-{/*      
+
+      {isAdmin && (
+        <Button variant="danger" onClick={() => handleDelete(room.id)}>
+          Remove
+        </Button>
+      )}
+      {/*      
       <Button 
       variant="danger" 
       onClick={() => handleDelete(room.id)}
       >
         Remove
       </Button>  */}
-
     </div>
   ));
 
   // console.log(roomHTML)
-  return (
-  
-  <div>
-    {roomHTML}
-  </div>
-
-  )
+  return <div>{roomHTML}</div>;
 }
 export default ChatRoom;
