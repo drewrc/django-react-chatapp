@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import RoomComponent from "./RoomComponent";
 import Messages from "./Messages";
+import Button from "react-bootstrap/esm/Button";
+import Cookies from "js-cookie";
 
 function ChatRoom({ handleRoomClick }) {
   const [rooms, setRooms] = useState([]);
@@ -17,20 +19,35 @@ function ChatRoom({ handleRoomClick }) {
     getRoom();
   }, []);
 
-  
+  const handleDelete = async (roomId) => {
+    const response = await fetch(`/api_v1/chatrooms/${roomId}/`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+    setRooms((prevRooms) => prevRooms.filter((room) => room.id !== roomId));
+  };
 
   const roomHTML = rooms.map((room) => (
     <div key={room.id}>
       <RoomComponent room={room} />
-        <button 
+      <Button
+        variant="dark"
         onClick={() => handleRoomClick(room)}
         className="enter-button"
-        >
+      >
         {room.name}
-        </button>
+      </Button>
+      <Button variant="danger" onClick={() => handleDelete(room.id)}>
+        Remove
+      </Button>
     </div>
   ));
-
+  console.log(roomHTML)
   return (
   
   <div>
