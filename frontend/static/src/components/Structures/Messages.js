@@ -8,20 +8,23 @@ function Messages({ roomId }) {
   const [user, setUser] = useState(null);
   const [editMessageId, setEditMessageId] = useState(null);
 
-  console.log(messages);
-
+  console.log(messages.id);
+  // console.log(roomId)
   const handleCancelEdit = () => {
     setEditMessageId(null);
   };
 
+  const handleEdit = (e, messageId) => {
+    e.preventDefault();
+    setEditMessageId(messageId);
+  };
+
   const handleSaveEdit = async (e, newText) => {
-    // console.log(newText)
-    // console.log(`Saving edited message with ID ${editMessageId}: ${newText}`);
     const response = await fetch(`/api_v1/messages/${editMessageId}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": Cookies.get("csrftoken"), // assuming you are using Django CSRF protection
+        "X-CSRFToken": Cookies.get("csrftoken"), 
       },
       body: JSON.stringify({ text: newText }),
     });
@@ -29,6 +32,8 @@ function Messages({ roomId }) {
       throw new Error("Network response was not OK");
     }
 
+    
+//set new edited message ---- >
     setMessages((prevMessages) => {
       const updatedMessages = prevMessages.map((message) => {
         if (message.id === editMessageId) {
@@ -45,7 +50,19 @@ function Messages({ roomId }) {
     setEditMessageId(null);
   };
 
-  // console.log ({messages})
+  const handleDelete = async (e, messageId) => {
+    e.preventDefault()
+    const response = await fetch(`/api_v1/messages/${messageId}/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"), 
+      }
+  })
+  if (!response.ok) {
+    throw new Error("Network response was not OK");
+  }
+}
 
   //Fetch for user editing and deleting ---- >
   //return authenticated user to compare pk to message.user
@@ -74,18 +91,20 @@ function Messages({ roomId }) {
     getMessages();
   }, [roomId]);
 
-  const handleEdit = (e, messageId) => {
-    e.preventDefault();
-    setEditMessageId(messageId);
-  };
-  // console.log({editMessageId})
 
   const messageHTML = messages.map((message) => {
     if (editMessageId === message.id) {
       return (
         <div key={message.id}>
-          <EditMessage message={message.text} onSaveEdit={handleSaveEdit} />
-          <Button type="submit" variant="dark" onClick={handleCancelEdit}>
+          <EditMessage 
+          message={message.text}
+          onSaveEdit={handleSaveEdit} 
+          />
+          <Button 
+          type="submit" 
+          variant="dark" 
+          onClick={handleCancelEdit}
+          >
             Cancel
           </Button>
         </div>
@@ -108,7 +127,11 @@ function Messages({ roomId }) {
               >
                 Edit
               </Button>
-              <Button type="submit" variant="light">
+              <Button 
+              type="submit" 
+              variant="light"
+              onClick={(e) => handleDelete(e, message.id)}
+              >
                 Delete
               </Button>
             </div>
