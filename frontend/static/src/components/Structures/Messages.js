@@ -6,10 +6,12 @@ import Button from "react-bootstrap/esm/Button";
 function Messages({ roomId }) {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [editMessageId, setEditMessageId] = useState(null);
 
-  console.log(messages.id);
+  // console.log(messages.id);
   // console.log(roomId)
+
   const handleCancelEdit = () => {
     setEditMessageId(null);
   };
@@ -78,6 +80,20 @@ function Messages({ roomId }) {
     getUser();
   }, []);
 
+  //returns isAdmin True or False depending on user ----->
+  useEffect(() => {
+    const getAdmin = async () => {
+      const response = await fetch ('/api_v1/is_admin/');
+      if (!response.ok) {
+        throw new Error("Network response was not ok")
+      }
+      const data = await response.json();
+      setIsAdmin(data);
+    };
+    getAdmin();
+  }, []);
+  
+
   //Fetch for chatrooms filtered by ID ---- >
   useEffect(() => {
     const getMessages = async () => {
@@ -91,25 +107,36 @@ function Messages({ roomId }) {
     getMessages();
   }, [roomId]);
 
+  // console.log({isAdmin})
+  // console.log({user})
 
   const messageHTML = messages.map((message) => {
-    if (editMessageId === message.id) {
+    if (editMessageId === message.id) { 
       return (
+        // render edit form if message is being edited --->
         <div key={message.id}>
           <EditMessage 
-          message={message.text}
-          onSaveEdit={handleSaveEdit} 
+            message={message.text}
+            onSaveEdit={handleSaveEdit} 
           />
           <Button 
-          type="submit" 
-          variant="dark" 
-          onClick={handleCancelEdit}
+            type="submit" 
+            variant="dark" 
+            onClick={handleCancelEdit}
           >
             Cancel
           </Button>
         </div>
       );
+      
     } else {
+
+      //  render message for all users ---- >
+      //  render message and edit button if user = message.user  ---- >
+      //  render message and delete if isAdmin = True  OR user = message.user ---- >
+      const canEdit = user && user.pk === message.user;
+      const canDelete = isAdmin || (user && user.pk === message.user);
+  
       return (
         <div key={message.id}>
           {message.text}
@@ -117,30 +144,35 @@ function Messages({ roomId }) {
             By {message.username}
             <div id="small">{message.created_at}</div>
           </div>
-
-          {user && user.pk === message.user && (
+  
+          {(canEdit || canDelete) && (
             <div>
-              <Button
-                type="submit"
-                variant="light"
-                onClick={(e) => handleEdit(e, message.id)}
-              >
-                Edit
-              </Button>
-              <Button 
-              type="submit" 
-              variant="light"
-              onClick={(e) => handleDelete(e, message.id)}
-              >
-                Delete
-              </Button>
+              {canEdit && (
+                <Button
+                  type="submit"
+                  variant="light"
+                  onClick={(e) => handleEdit(e, message.id)}
+                >
+                  Edit
+                </Button>
+              )}
+  
+              {canDelete && (
+                <Button 
+                  type="submit" 
+                  variant="light"
+                  onClick={(e) => handleDelete(e, message.id)}
+                >
+                  Delete
+                </Button>
+              )}
             </div>
           )}
         </div>
       );
     }
   });
-
+  
   return (
   <div>
     {messageHTML}
