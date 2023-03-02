@@ -39,14 +39,14 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link onClick={() => handlePageChange("home")}>Home</Nav.Link>
+            <Nav.Link onClick={() => handlePageChange("user")}>Home</Nav.Link>
             <Nav.Link onClick={() => handlePageChange("login")}>Login</Nav.Link>
             <Nav.Link onClick={() => handlePageChange("register")}>
               Register
             </Nav.Link>
-            <Nav.Link onClick={() => handlePageChange("user")}>
+            {/* <Nav.Link onClick={() => handlePageChange("user")}>
               User View
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link onClick={() => handlePageChange("logout")}>
               Logout
             </Nav.Link>
