@@ -13,7 +13,10 @@ class MessageSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField()
 
     def get_username(self, obj):
-        return obj.user.get_username()
+        if obj.user:
+            return obj.user.get_username()
+        else:
+            return None
 
     class Meta:
         model = Message

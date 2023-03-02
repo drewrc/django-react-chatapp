@@ -34,7 +34,12 @@ class MessageListAPIView(generics.ListCreateAPIView):
         room = self.kwargs.get('room')  # get the room parameter from the URL
         queryset = Message.objects.filter(room=room)  # filter the queryset based on room
         return queryset
-
+    
+    def perform_create(self, serializer):
+        room_id = self.kwargs.get('room')
+        chatroom = Chatroom.objects.get(pk=room_id)
+        serializer.save(room=chatroom)
+        
 class MessageDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
